@@ -1,0 +1,268 @@
+index.html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wie weit reicht dein Geld?</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #eef3f5, #d9e5e8);
+            font-family: Arial, Helvetica, sans-serif;
+            color: #243238;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 620px;
+            padding: 32px;
+            background: white;
+            border-radius: 22px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 32px;
+        }
+
+        .intro {
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        button,
+        .form-button {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 12px;
+            background: #253f46;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        button:hover,
+        .form-button:hover {
+            background: #385c65;
+        }
+
+        #roleCard {
+            display: none;
+            margin-top: 28px;
+            padding: 25px;
+            border: 2px solid #d6e1e4;
+            border-radius: 18px;
+            background: #f8fbfc;
+        }
+
+        #emoji {
+            font-size: 54px;
+            margin-bottom: 5px;
+        }
+
+        #roleName {
+            margin-bottom: 8px;
+            font-size: 26px;
+        }
+
+        #description {
+            font-size: 17px;
+            line-height: 1.55;
+        }
+
+        .budget-label {
+            margin-top: 22px;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        #budget {
+            margin: 0;
+            font-size: 40px;
+            color: #1f5964;
+        }
+
+        .notice {
+            margin-top: 20px;
+            padding: 13px;
+            border-radius: 10px;
+            background: #edf3f4;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .small {
+            margin-top: 22px;
+            font-size: 13px;
+            color: #627177;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 14px;
+            }
+
+            .container {
+                padding: 24px 18px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>💶 Wie weit reicht dein Geld?</h1>
+
+    <p class="intro">
+        Jeder Mensch lebt unter anderen finanziellen Voraussetzungen.
+        Klicke auf den Button und dir wird zufällig eine Lebenssituation
+        zugeteilt.
+    </p>
+
+    <button id="drawButton" onclick="drawRole()">
+        🎲 Zufällige Rolle ziehen
+    </button>
+
+    <div id="roleCard">
+
+        <div id="emoji"></div>
+
+        <h2 id="roleName"></h2>
+
+        <p id="description"></p>
+
+        <p class="budget-label">
+            Verfügbares Monatsbudget nach festen Ausgaben:
+        </p>
+
+        <h3 id="budget"></h3>
+
+        <div class="notice">
+            Miete, Strom, Versicherungen und andere feste Ausgaben sind
+            bereits bezahlt. Teile das angezeigte Budget in der Umfrage
+            auf Lebensmittel, Mobilität, Kleidung, Gesundheit, Freizeit
+            und Rücklagen auf.
+            <br><br>
+            <strong>Merke dir deine Rolle und dein Budget.</strong>
+        </div>
+
+        <a
+            class="form-button"
+            id="formLink"
+            href="https://forms.office.com/Pages/ResponsePage.aspx?id=TR9fjAfO8kypSpCt-6GZzYCcAIRPz9BJjMgcmjnCA7dUMVE3M1RCMVdPNDNRV1pMMTRHNVNPQlFZUy4u"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Zur anonymen Umfrage →
+        </a>
+
+    </div>
+
+    <p class="small">
+        Schulprojekt zum Thema Armut, soziale Vielfalt und unterschiedliche
+        Lebensrealitäten
+    </p>
+
+</div>
+
+<script>
+    const roles = [
+        {
+            emoji: "👵",
+            name: "Rentnerin",
+            description:
+                "Du bist 74 Jahre alt, lebst allein und beziehst eine kleine gesetzliche Rente.",
+            budget: "500 €"
+        },
+        {
+            emoji: "👨‍👧‍👦",
+            name: "Alleinerziehender Vater mit zwei Kindern",
+            description:
+                "Du bist 36 Jahre alt, arbeitest in Teilzeit und versorgst zwei Kinder im Alter von 6 und 9 Jahren.",
+            budget: "900 €"
+        },
+        {
+            emoji: "♿",
+            name: "Person mit Behinderung",
+            description:
+                "Du bist 31 Jahre alt, nutzt einen Rollstuhl und arbeitest aufgrund deiner persönlichen Situation derzeit in Teilzeit.",
+            budget: "650 €"
+        },
+        {
+            emoji: "🌍",
+            name: "Person mit Migrationsgeschichte",
+            description:
+                "Du bist 30 Jahre alt und vor einigen Jahren nach Deutschland gezogen. Dein Berufsabschluss wird noch nicht vollständig anerkannt, weshalb du momentan unter deiner eigentlichen Qualifikation arbeitest.",
+            budget: "700 €"
+        },
+        {
+            emoji: "💼",
+            name: "Vielverdienerin",
+            description:
+                "Du bist 39 Jahre alt, arbeitest als Führungskraft und verfügst über ein hohes Einkommen.",
+            budget: "2.500 €"
+        },
+        {
+            emoji: "👷",
+            name: "Geringverdiener",
+            description:
+                "Du bist 26 Jahre alt, arbeitest Vollzeit und erhältst ein niedriges Einkommen.",
+            budget: "550 €"
+        }
+    ];
+
+    function drawRole() {
+        const randomNumber = Math.floor(Math.random() * roles.length);
+        const selectedRole = roles[randomNumber];
+
+        document.getElementById("emoji").textContent =
+            selectedRole.emoji;
+
+        document.getElementById("roleName").textContent =
+            selectedRole.name;
+
+        document.getElementById("description").textContent =
+            selectedRole.description;
+
+        document.getElementById("budget").textContent =
+            selectedRole.budget;
+
+        document.getElementById("roleCard").style.display =
+            "block";
+
+        document.getElementById("drawButton").style.display =
+            "none";
+
+        document.getElementById("roleCard").scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+</script>
+
+</body>
+</html>
